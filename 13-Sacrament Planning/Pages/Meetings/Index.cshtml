@@ -1,0 +1,72 @@
+﻿@page
+@model _13_Sacrament_Planning.Pages.Meetings.IndexModel
+
+@{
+    ViewData["Title"] = "Meetings List";
+}
+
+<h1>Meetings List</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].OpeningHymnID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].SacramentHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].ClosingHymn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].OpeningPrayerMember)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].ClosingPrayerMember)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Meeting[0].BishopricRole)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Meeting) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningHymnID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SacramentHymn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingHymn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningPrayerMember)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingPrayerMember)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BishopricRole)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

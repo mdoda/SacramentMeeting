@@ -1,11 +1,11 @@
 ﻿@page
-@model _13_Sacrament_Planning.Pages.Students.IndexModel
+@model _13_Sacrament_Planning.Pages.Members.IndexModel
 
 @{
-    ViewData["Title"] = "Hymns List";
+    ViewData["Title"] = "Members List";
 }
 
-<h1>Hymns List</h1>
+<h1>Members List</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,16 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Hymn[0].Title)
+                @Html.DisplayNameFor(model => model.Member[0].Name)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Hymn) {
+@foreach (var item in Model.Member) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

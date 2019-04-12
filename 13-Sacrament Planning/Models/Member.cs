@@ -14,5 +14,7 @@ namespace _13_Sacrament_Planning.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
+
+        public List<Speaker> Talks { get; set; }
     }
 }

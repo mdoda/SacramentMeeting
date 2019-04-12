@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,25 +10,33 @@ namespace _13_Sacrament_Planning.Models
     //TODO the foreign key
     public class Meeting
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Date")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Opening Song")]
-        public int OpeningHymnID { get; set; }
+        public string OpeningHymnID { get; set; }
+
         [Display(Name = "Sacrament Song")]
-        public int? SacramentID { get; set; }
+        public string SacramentHymn { get; set; }
+
         [Display(Name = "Closing Song")]
-        public int ClosingHymnID { get; set; }
+        public string ClosingHymn { get; set; }
 
         [Display(Name = "Opening Prayer")]
-        public int OpeningPrayerMemberID { get; set; }
+        public string OpeningPrayerMember { get; set; }
+
         [Display(Name = "Closing Prayer")]
-        public int ClosingPrayerID { get; set; }
+        public string ClosingPrayerMember { get; set; }
 
         [Display(Name = "Conducting")]
-        public string BishoppricRole { get; set; }
+        public string BishopricRole { get; set; }
+
+        public List<Speaker> Speakers { get; set; }
     }
 }
 
