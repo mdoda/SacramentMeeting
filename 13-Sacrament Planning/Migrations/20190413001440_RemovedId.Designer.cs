@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _13_Sacrament_Planning.Models;
 
 namespace _13_Sacrament_Planning.Migrations
 {
     [DbContext(typeof(SacramentPlanningContext))]
-    partial class SacramentPlanningContextModelSnapshot : ModelSnapshot
+    [Migration("20190413001440_RemovedId")]
+    partial class RemovedId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

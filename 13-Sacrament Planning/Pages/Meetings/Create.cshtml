@@ -14,43 +14,51 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Meeting.ID" class="control-label"></label>
-                <input asp-for="Meeting.ID" class="form-control" />
-                <span asp-validation-for="Meeting.ID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Meeting.Date" class="control-label"></label>
                 <input asp-for="Meeting.Date" class="form-control" />
                 <span asp-validation-for="Meeting.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Meeting.OpeningHymnID" class="control-label"></label>
-                <input asp-for="Meeting.OpeningHymnID" class="form-control" />
-                <span asp-validation-for="Meeting.OpeningHymnID" class="text-danger"></span>
+
+                <label asp-for="Meeting.OpeningHymn" class="control-label"></label>
+                <select asp-for="Meeting.OpeningHymn" class="form-control" asp-items="ViewBag.Songs">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
+                <span asp-validation-for="Meeting.OpeningHymn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.SacramentHymn" class="control-label"></label>
-                <input asp-for="Meeting.SacramentHymn" class="form-control" />
+                <select asp-for="Meeting.SacramentHymn" class="form-control" asp-items="ViewBag.Songs">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
                 <span asp-validation-for="Meeting.SacramentHymn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.ClosingHymn" class="control-label"></label>
-                <input asp-for="Meeting.ClosingHymn" class="form-control" />
+                <select asp-for="Meeting.ClosingHymn" class="form-control" asp-items="ViewBag.Songs">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
                 <span asp-validation-for="Meeting.ClosingHymn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.OpeningPrayerMember" class="control-label"></label>
-                <input asp-for="Meeting.OpeningPrayerMember" class="form-control" />
+                <select asp-for="Meeting.OpeningPrayerMember" class="form-control" asp-items="ViewBag.Members">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
                 <span asp-validation-for="Meeting.OpeningPrayerMember" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.ClosingPrayerMember" class="control-label"></label>
-                <input asp-for="Meeting.ClosingPrayerMember" class="form-control" />
+                <select asp-for="Meeting.ClosingPrayerMember" class="form-control" asp-items="ViewBag.Members">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
                 <span asp-validation-for="Meeting.ClosingPrayerMember" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Meeting.BishopricRole" class="control-label"></label>
-                <input asp-for="Meeting.BishopricRole" class="form-control" />
+                <select asp-for="Meeting.BishopricRole" class="form-control" asp-items="ViewBag.BishopricRoles">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
                 <span asp-validation-for="Meeting.BishopricRole" class="text-danger"></span>
             </div>
             <div class="form-group">

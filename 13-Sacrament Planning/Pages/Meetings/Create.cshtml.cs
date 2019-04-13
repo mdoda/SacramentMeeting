@@ -20,6 +20,9 @@ namespace _13_Sacrament_Planning.Pages.Meetings
 
         public IActionResult OnGet()
         {
+            ViewData["Songs"] = new SelectList(_context.Hymn, "Title", "Title");
+            ViewData["Members"] = new SelectList(_context.Member, "Name", "Name");
+            ViewData["BishopricRoles"] = new SelectList(Constants.BishopricRoles);
             return Page();
         }
 
