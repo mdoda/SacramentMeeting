@@ -27,7 +27,11 @@ namespace _13_Sacrament_Planning.Pages.Meetings
                 return NotFound();
             }
 
-            Meeting = await _context.Meeting.FirstOrDefaultAsync(m => m.ID == id);
+            Meeting =  await _context.Meeting
+                                    .Include(m => m.Speakers)
+                                    .ThenInclude(s => s.Member)
+                                    .AsNoTracking()
+                                    .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Meeting == null)
             {

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Data\SacramentPlanningContext.cs" />
     <Content Include="Models\Hymn.cs" />
     <Content Include="Models\Meeting.cs" />
     <Content Include="Models\Member.cs" />

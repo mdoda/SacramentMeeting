@@ -21,7 +21,9 @@ namespace _13_Sacrament_Planning.Migrations
 
             modelBuilder.Entity("_13_Sacrament_Planning.Models.Hymn", b =>
                 {
-                    b.Property<int>("ID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -34,9 +36,12 @@ namespace _13_Sacrament_Planning.Migrations
 
             modelBuilder.Entity("_13_Sacrament_Planning.Models.Meeting", b =>
                 {
-                    b.Property<int>("ID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BishopricRole");
+                    b.Property<string>("BishopricRole")
+                        .IsRequired();
 
                     b.Property<string>("ClosingHymn")
                         .IsRequired();
@@ -61,7 +66,9 @@ namespace _13_Sacrament_Planning.Migrations
 
             modelBuilder.Entity("_13_Sacrament_Planning.Models.Member", b =>
                 {
-                    b.Property<int>("ID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()

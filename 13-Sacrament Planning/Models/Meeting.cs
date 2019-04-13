@@ -10,7 +10,7 @@ namespace _13_Sacrament_Planning.Models
     //TODO the foreign key
     public class Meeting
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]

@@ -1,24 +1,39 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _13_Sacrament_Planning.Migrations
 {
-    public partial class AddedCompositePrimaryKey : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Hymn",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hymn", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Meeting",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(nullable: false),
-                    OpeningHymnID = table.Column<int>(nullable: false),
-                    SacramentID = table.Column<int>(nullable: true),
-                    ClosingHymnID = table.Column<int>(nullable: false),
-                    OpeningPrayerMemberID = table.Column<int>(nullable: false),
-                    ClosingPrayerID = table.Column<int>(nullable: false),
-                    BishoppricRole = table.Column<string>(nullable: true)
+                    OpeningHymn = table.Column<string>(nullable: false),
+                    SacramentHymn = table.Column<string>(nullable: true),
+                    ClosingHymn = table.Column<string>(nullable: false),
+                    OpeningPrayerMember = table.Column<string>(nullable: false),
+                    ClosingPrayerMember = table.Column<string>(nullable: false),
+                    BishopricRole = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +44,8 @@ namespace _13_Sacrament_Planning.Migrations
                 name: "Member",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -70,6 +86,9 @@ namespace _13_Sacrament_Planning.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Hymn");
+
             migrationBuilder.DropTable(
                 name: "Speaker");
 

@@ -25,5 +25,7 @@ namespace _13_Sacrament_Planning.Models
         public DbSet<_13_Sacrament_Planning.Models.Member> Member { get; set; }
 
         public DbSet<_13_Sacrament_Planning.Models.Meeting> Meeting { get; set; }
+
+        public DbSet<_13_Sacrament_Planning.Models.Speaker> Speaker { get; set; }
     }
 }

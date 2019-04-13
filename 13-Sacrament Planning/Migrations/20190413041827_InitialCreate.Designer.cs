@@ -10,8 +10,8 @@ using _13_Sacrament_Planning.Models;
 namespace _13_Sacrament_Planning.Migrations
 {
     [DbContext(typeof(SacramentPlanningContext))]
-    [Migration("20190412190851_AddedKeys")]
-    partial class AddedKeys
+    [Migration("20190413041827_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,9 @@ namespace _13_Sacrament_Planning.Migrations
 
             modelBuilder.Entity("_13_Sacrament_Planning.Models.Hymn", b =>
                 {
-                    b.Property<int>("ID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -36,21 +38,28 @@ namespace _13_Sacrament_Planning.Migrations
 
             modelBuilder.Entity("_13_Sacrament_Planning.Models.Meeting", b =>
                 {
-                    b.Property<int>("ID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BishopricRole");
+                    b.Property<string>("BishopricRole")
+                        .IsRequired();
 
-                    b.Property<int>("ClosingHymnID");
+                    b.Property<string>("ClosingHymn")
+                        .IsRequired();
 
-                    b.Property<int>("ClosingPrayerID");
+                    b.Property<string>("ClosingPrayerMember")
+                        .IsRequired();
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int>("OpeningHymnID");
+                    b.Property<string>("OpeningHymn")
+                        .IsRequired();
 
-                    b.Property<int>("OpeningPrayerMemberID");
+                    b.Property<string>("OpeningPrayerMember")
+                        .IsRequired();
 
-                    b.Property<int?>("SacramentHymnID");
+                    b.Property<string>("SacramentHymn");
 
                     b.HasKey("ID");
 
@@ -59,7 +68,9 @@ namespace _13_Sacrament_Planning.Migrations
 
             modelBuilder.Entity("_13_Sacrament_Planning.Models.Member", b =>
                 {
-                    b.Property<int>("ID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -88,12 +99,12 @@ namespace _13_Sacrament_Planning.Migrations
             modelBuilder.Entity("_13_Sacrament_Planning.Models.Speaker", b =>
                 {
                     b.HasOne("_13_Sacrament_Planning.Models.Meeting", "Meeting")
-                        .WithMany()
+                        .WithMany("Speakers")
                         .HasForeignKey("MeetingID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("_13_Sacrament_Planning.Models.Member", "Member")
-                        .WithMany()
+                        .WithMany("Talks")
                         .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

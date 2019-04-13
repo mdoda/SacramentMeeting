@@ -53,6 +53,28 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Meeting.BishopricRole)
         </dd>
+        <dt class="col-sm-2">
+            Speakers
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Member</th>
+                    <th>Topic</th>
+                </tr>
+                @foreach (var item in Model.Meeting.Speakers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Member.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>

@@ -16,20 +16,24 @@ namespace _13_Sacrament_Planning.Pages.Meetings
         public CreateModel(_13_Sacrament_Planning.Models.SacramentPlanningContext context)
         {
             _context = context;
+            Songs = new SelectList(_context.Hymn, "Title", "Title");
+            Members = new SelectList(_context.Member, "Name", "Name");
+            BishopricRoles = new SelectList(Constants.BishopricRoles);
         }
+
+        public SelectList Songs { get; set; }
+        public SelectList Members { get; set; }
+        public SelectList BishopricRoles { get; set; }
 
         public IActionResult OnGet()
         {
-            ViewData["Songs"] = new SelectList(_context.Hymn, "Title", "Title");
-            ViewData["Members"] = new SelectList(_context.Member, "Name", "Name");
-            ViewData["BishopricRoles"] = new SelectList(Constants.BishopricRoles);
             return Page();
         }
 
         [BindProperty]
         public Meeting Meeting { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(List<int> speakerIDs, List<string> topics)
         {
             if (!ModelState.IsValid)
             {
@@ -37,6 +41,21 @@ namespace _13_Sacrament_Planning.Pages.Meetings
             }
 
             _context.Meeting.Add(Meeting);
+            await _context.SaveChangesAsync();
+
+            List<Speaker> speakers = new List<Speaker>();
+
+            for(int i = 0; i < speakerIDs.Count; ++i)
+            {
+                speakers.Add(new Speaker()
+                {
+                    MeetingID = Meeting.ID,
+                    MemberID = speakerIDs[i],
+                    Topic = topics[i]
+                });
+            }
+
+            _context.Speaker.AddRange(speakers);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -5,62 +5,119 @@
     ViewData["Title"] = "Create";
 }
 
+<script>
+    function tostring(index)
+    {
+        index++;
+        switch (index) {
+            case 1:
+                return "1st";
+            case 2:
+                return "2nd";
+            case 3:
+                return "3rd";
+            default:
+                return `${index}th`;
+        }
+    }
+
+    function createSpeakers(input) {
+        let nrSpeakers = input.value
+        let speakersDiv = document.getElementById("speakersDiv")
+        speakersDiv.innerHTML = "";
+
+        let stringSpeakers = "";
+
+        for (let i = 0; i < nrSpeakers; ++i) {
+            stringSpeakers += `
+                <label class="control-label">${tostring(i)} speaker</label> <br>
+                    <select class="form-control" data-val="true" required name="speakerIDs[]">
+                        <option disabled selected>--- SELECT ---</option>
+                        <option value="1">Klevin Doda</option>
+                        <option value="2">Mateo Doda</option>
+                        <option value="3">Grei Lika</option>
+                        <option value="4">Elsa Doda</option>
+                        <option value="5">John Smith</option>
+                        <option value="6">Eliza Dushku</option>
+                    </select> <br>
+                <input placeholder="topic" required class="form-control" name="topics[]"/> <br>`;
+        }
+
+        speakersDiv.insertAdjacentHTML('beforeend', stringSpeakers);
+    }
+</script>
+
 <h1>Create</h1>
 
 <h4>Meeting</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div>
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Meeting.Date" class="control-label"></label>
-                <input asp-for="Meeting.Date" class="form-control" />
-                <span asp-validation-for="Meeting.Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <section class="top-row">
+                <div class="left">
+                    <div class="form-group">
+                        <label asp-for="Meeting.Date" class="control-label"></label>
+                        <input asp-for="Meeting.Date" class="form-control" />
+                        <span asp-validation-for="Meeting.Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
 
-                <label asp-for="Meeting.OpeningHymn" class="control-label"></label>
-                <select asp-for="Meeting.OpeningHymn" class="form-control" asp-items="ViewBag.Songs">
-                    <option disabled selected>--- SELECT ---</option>
-                </select>
-                <span asp-validation-for="Meeting.OpeningHymn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.SacramentHymn" class="control-label"></label>
-                <select asp-for="Meeting.SacramentHymn" class="form-control" asp-items="ViewBag.Songs">
-                    <option disabled selected>--- SELECT ---</option>
-                </select>
-                <span asp-validation-for="Meeting.SacramentHymn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.ClosingHymn" class="control-label"></label>
-                <select asp-for="Meeting.ClosingHymn" class="form-control" asp-items="ViewBag.Songs">
-                    <option disabled selected>--- SELECT ---</option>
-                </select>
-                <span asp-validation-for="Meeting.ClosingHymn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.OpeningPrayerMember" class="control-label"></label>
-                <select asp-for="Meeting.OpeningPrayerMember" class="form-control" asp-items="ViewBag.Members">
-                    <option disabled selected>--- SELECT ---</option>
-                </select>
-                <span asp-validation-for="Meeting.OpeningPrayerMember" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.ClosingPrayerMember" class="control-label"></label>
-                <select asp-for="Meeting.ClosingPrayerMember" class="form-control" asp-items="ViewBag.Members">
-                    <option disabled selected>--- SELECT ---</option>
-                </select>
-                <span asp-validation-for="Meeting.ClosingPrayerMember" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.BishopricRole" class="control-label"></label>
-                <select asp-for="Meeting.BishopricRole" class="form-control" asp-items="ViewBag.BishopricRoles">
-                    <option disabled selected>--- SELECT ---</option>
-                </select>
-                <span asp-validation-for="Meeting.BishopricRole" class="text-danger"></span>
-            </div>
+                        <label asp-for="Meeting.OpeningHymn" class="control-label"></label>
+                        <select asp-for="Meeting.OpeningHymn" class="form-control" asp-items="@Model.Songs">
+                            <option disabled selected>--- SELECT ---</option>
+                        </select>
+                        <span asp-validation-for="Meeting.OpeningHymn" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.SacramentHymn" class="control-label"></label>
+                        <select asp-for="Meeting.SacramentHymn" class="form-control" asp-items="@Model.Songs">
+                            <option disabled selected>--- SELECT ---</option>
+                        </select>
+                        <span asp-validation-for="Meeting.SacramentHymn" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.ClosingHymn" class="control-label"></label>
+                        <select asp-for="Meeting.ClosingHymn" class="form-control" asp-items="@Model.Songs">
+                            <option disabled selected>--- SELECT ---</option>
+                        </select>
+                        <span asp-validation-for="Meeting.ClosingHymn" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="form-group">
+                        <label asp-for="Meeting.OpeningPrayerMember" class="control-label"></label>
+                        <select asp-for="Meeting.OpeningPrayerMember" class="form-control" asp-items="@Model.Members">
+                            <option disabled selected>--- SELECT ---</option>
+                        </select>
+                        <span asp-validation-for="Meeting.OpeningPrayerMember" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.ClosingPrayerMember" class="control-label"></label>
+                        <select asp-for="Meeting.ClosingPrayerMember" class="form-control" asp-items="@Model.Members">
+                            <option disabled selected>--- SELECT ---</option>
+                        </select>
+                        <span asp-validation-for="Meeting.ClosingPrayerMember" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.BishopricRole" class="control-label"></label>
+                        <select asp-for="Meeting.BishopricRole" class="form-control" asp-items="@Model.BishopricRoles">
+                            <option disabled selected>--- SELECT ---</option>
+                        </select>
+                        <span asp-validation-for="Meeting.BishopricRole" class="text-danger"></span>
+                    </div>
+                </div>
+            </section>
+            <section class="bottom-row">
+                <div class="form-group">
+                    <label class="control-label">How many speakers?</label>
+                    <input type="number" id="speakersInput" name="speakers" min="0" max="10" onchange="createSpeakers(this)" />
+                </div>
+                <div id="speakersDiv">
+
+                </div>
+            </section>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

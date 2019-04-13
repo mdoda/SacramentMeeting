@@ -6,49 +6,68 @@
 }
 
 <h1>Edit</h1>
-
+       
 <h4>Meeting</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div>
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Meeting.ID" />
-            <div class="form-group">
-                <label asp-for="Meeting.Date" class="control-label"></label>
-                <input asp-for="Meeting.Date" class="form-control" />
-                <span asp-validation-for="Meeting.Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.OpeningHymn" class="control-label"></label>
-                <input asp-for="Meeting.OpeningHymn" class="form-control" />
-                <span asp-validation-for="Meeting.OpeningHymn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.SacramentHymn" class="control-label"></label>
-                <input asp-for="Meeting.SacramentHymn" class="form-control" />
-                <span asp-validation-for="Meeting.SacramentHymn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.ClosingHymn" class="control-label"></label>
-                <input asp-for="Meeting.ClosingHymn" class="form-control" />
-                <span asp-validation-for="Meeting.ClosingHymn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.OpeningPrayerMember" class="control-label"></label>
-                <input asp-for="Meeting.OpeningPrayerMember" class="form-control" />
-                <span asp-validation-for="Meeting.OpeningPrayerMember" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.ClosingPrayerMember" class="control-label"></label>
-                <input asp-for="Meeting.ClosingPrayerMember" class="form-control" />
-                <span asp-validation-for="Meeting.ClosingPrayerMember" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Meeting.BishopricRole" class="control-label"></label>
-                <input asp-for="Meeting.BishopricRole" class="form-control" />
-                <span asp-validation-for="Meeting.BishopricRole" class="text-danger"></span>
-            </div>
+            <section class="top-row">
+                <div class="left">
+                    <div class="form-group">
+                        <label asp-for="Meeting.Date" class="control-label"></label>
+                        <input asp-for="Meeting.Date" class="form-control" />
+                        <span asp-validation-for="Meeting.Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.OpeningHymn" class="control-label"></label>
+                        <select asp-for="Meeting.OpeningHymn" class="form-control" asp-items="@Model.Songs"></select>
+                        <span asp-validation-for="Meeting.OpeningHymn" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.SacramentHymn" class="control-label"></label>
+                        <select asp-for="Meeting.SacramentHymn" class="form-control" asp-items="@Model.Songs">
+                            <option disabled selected>--- SELECT ---</option>
+                        </select>
+                        <span asp-validation-for="Meeting.SacramentHymn" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.ClosingHymn" class="control-label"></label>
+                        <select asp-for="Meeting.ClosingHymn" class="form-control" asp-items="@Model.Songs"></select>
+                        <span asp-validation-for="Meeting.ClosingHymn" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="form-group">
+                        <label asp-for="Meeting.OpeningPrayerMember" class="control-label"></label>
+                        <select asp-for="Meeting.OpeningPrayerMember" class="form-control" asp-items="@Model.Members"></select>
+                        <span asp-validation-for="Meeting.OpeningPrayerMember" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.ClosingPrayerMember" class="control-label"></label>
+                        <select asp-for="Meeting.ClosingPrayerMember" class="form-control" asp-items="@Model.Members"></select>
+                        <span asp-validation-for="Meeting.ClosingPrayerMember" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Meeting.BishopricRole" class="control-label"></label>
+                        <select asp-for="Meeting.BishopricRole" class="form-control" asp-items="@Model.BishopricRoles"></select>
+                        <span asp-validation-for="Meeting.BishopricRole" class="text-danger"></span>
+                    </div>
+                </div>
+            </section>
+            <section class="bottom-row">
+
+                <label>Speakers</label> <br />
+                @foreach (var item in Model.Meeting.Speakers)
+                {
+                    <label class="control-label">Speaker</label>
+                    <select name="speakersIDs[]" class="form-control" asp-items="@Model.Members"></select>
+                    <label class="control-label">Topic</label>
+                    <input placeholder="topic" required class="form-control" name="topics[]" value="@item.Topic" />
+                }
+            </section>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

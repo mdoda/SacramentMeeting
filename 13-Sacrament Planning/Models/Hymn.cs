@@ -9,7 +9,7 @@ namespace _13_Sacrament_Planning.Models
 {
     public class Hymn
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [Required]
         [StringLength(100)]
