@@ -63,7 +63,7 @@
                 @foreach (var item in Model.Meeting.Speakers)
                 {
                     <label class="control-label">Speaker</label>
-                    <select name="speakersIDs[]" class="form-control" asp-items="@Model.Members"></select>
+                    <select asp-for="@item.Member.Name" name="speakersIDs[]" class="form-control" asp-items="@Model.Members"></select>
                     <label class="control-label">Topic</label>
                     <input placeholder="topic" required class="form-control" name="topics[]" value="@item.Topic" />
                 }
